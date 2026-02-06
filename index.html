@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The CA's Dilemma: A Game Theory Simulation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>The CA's Dilemma</h1>
+            <p>Based on Robert Axelrod's "Evolution of Cooperation"</p>
+        </header>
+
+        <div id="step-1" class="card fade-in">
+            <h2>Select Your Profile</h2>
+            <div class="options-group">
+                <label class="radio-card">
+                    <input type="radio" name="role" value="student" onclick="showSubOptions('student')">
+                    <div class="card-content">
+                        <span class="icon">🎓</span>
+                        <h3>CA Student</h3>
+                    </div>
+                </label>
+                <label class="radio-card">
+                    <input type="radio" name="role" value="qualified" onclick="showSubOptions('qualified')">
+                    <div class="card-content">
+                        <span class="icon">💼</span>
+                        <h3>Qualified Chartered Accountant</h3>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div id="step-2" class="card hidden">
+            <h2 id="sub-question-text"></h2>
+            <div id="student-options" class="options-list hidden">
+                <label><input type="radio" name="sub-role" value="foundation"> Foundation</label>
+                <label><input type="radio" name="sub-role" value="inter-awaiting"> Inter Student Awaiting Results</label>
+                <label><input type="radio" name="sub-role" value="final-articleship"> Final Student Undergoing Articleship</label>
+                <label><input type="radio" name="sub-role" value="final-completed"> Final Student Completed Articleship</label>
+            </div>
+            <div id="qualified-options" class="options-list hidden">
+                <label><input type="radio" name="sub-role" value="practice"> In CA Practice</label>
+                <label><input type="radio" name="sub-role" value="job"> In Job</label>
+            </div>
+            <button id="start-btn" onclick="startGame()" disabled>Start Simulation</button>
+        </div>
+
+        <div id="game-area" class="hidden">
+            
+            <div class="scenario-box">
+                <h3 id="scenario-title">Scenario Title</h3>
+                <p id="scenario-desc">Scenario description goes here...</p>
+            </div>
+
+            <div class="strategy-selector">
+                <label for="opponent-strategy">Choose your Opponent:</label>
+                <select id="opponent-strategy" onchange="resetGame()">
+                    <option value="tit_for_tat">Tit for Tat (The Copycat)</option>
+                    <option value="always_defect">Always Defect (The Egoist)</option>
+                    <option value="always_cooperate">Always Cooperate (The Saint)</option>
+                    <option value="random">Random (The Unpredictable)</option>
+                    <option value="grim">Grim Trigger (The Unforgiving)</option>
+                </select>
+            </div>
+
+            <div class="scoreboard">
+                <div class="score-box user-score">
+                    <span class="score-label">You</span>
+                    <span id="score-user" class="score-val">0</span>
+                </div>
+                <div class="vs">VS</div>
+                <div class="score-box bot-score">
+                    <span class="score-label">Opponent</span>
+                    <span id="score-bot" class="score-val">0</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn-cooperate" onclick="playRound('cooperate')">🤝 Cooperate</button>
+                <button class="btn-defect" onclick="playRound('defect')">😈 Defect</button>
+            </div>
+
+            <div class="log-container">
+                <h4>Round History</h4>
+                <ul id="game-log"></ul>
+            </div>
+            
+            <button class="reset-btn" onclick="location.reload()">Start Over</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
